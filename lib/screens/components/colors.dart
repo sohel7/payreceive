@@ -8,8 +8,6 @@ const successColor= Colors.green;
 const worningColor= Colors.orange;
 const highlightColor= Colors.yellow;
 const dangerColor= Colors.red;
-
-
 const darktextColor= Colors.grey;
 const mutedTextColor= Colors.grey;
-//const lightGrayColor= Colors(#D3D3D3);
+const lightGreyColor= Colors.grey;
