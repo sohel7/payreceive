@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:payreceiveapp/screens/components/components.dart';
 
 import 'components/colors.dart';
 
@@ -15,15 +16,20 @@ class _HomePageState extends State<HomePage> {
 
  int sortValue = 1;
 
+ final TextEditingController _nameController =  TextEditingController();
+ final TextEditingController _phoneController =  TextEditingController();
+ final TextEditingController _receiveableController =  TextEditingController();
+ final TextEditingController _PayableController =  TextEditingController();
+ final TextEditingController _descriptionController =  TextEditingController();
+
+
  List<Color> colors = [
    primaryColor,
    successColor,
    worningColor,
    highlightColor,
    dangerColor,
-   darktextColor,
-   mutedTextColor,
-   lightGreyColor,
+   darktextColor
  ];
 
   @override
@@ -172,6 +178,7 @@ class _HomePageState extends State<HomePage> {
                   itemBuilder: (BuildContext context, int Index){
                     return  Card(
                       elevation: 0,
+                      margin: EdgeInsets.only(bottom: 8),
                       child: ListTile(
                         title: const Text('Sohel Hossain', style: TextStyle(fontWeight: FontWeight.w500),),
                         subtitle: const Text('28-May-2024 at 6:00 pm', style: TextStyle(color: mutedTextColor),),
@@ -185,8 +192,8 @@ class _HomePageState extends State<HomePage> {
                         ),
 
                         leading: CircleAvatar(
-                          backgroundColor: colors[Index >= colors.length ? Index % colors.length : Index], // backgroundColor:colors[Index >= colors.length],
-                          child: const Text('S', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.green),),
+                          backgroundColor: colors[Index >= colors.length ? Index % colors.length : Index],
+                          child: const Text('S', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.white),),
                         ),
                         contentPadding:const EdgeInsets.only(left: 15, right: 10),
                       ),
@@ -197,9 +204,116 @@ class _HomePageState extends State<HomePage> {
             ),
             ),
           ],
-
         ),
       ),
+
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.assignment_add, color: Colors.white,),
+        backgroundColor: primaryColor,
+          onPressed: ()=>showDialog(
+            context: context,
+            builder: (context)=>AlertDialog(
+              title: const Text('New Customer/Supplier', style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold,color: Colors.amber,),),
+              content: DefaultTabController(length: 2, child: SizedBox(
+                height: 400,
+                child: Scaffold(
+                  appBar: AppBar(
+                    title: const TabBar(
+                      tabs: [
+                        Tab(icon: Text('Customer'),),
+                        Tab(icon: Text('Supplier'),)
+                      ],
+                    ),
+                    automaticallyImplyLeading: false,
+                    backgroundColor: Colors.transparent,
+                  ),
+                  body: TabBarView(
+                    children: [
+                      // Customer Section
+                      ListView(
+                        children: [
+                          // Customer Name
+                          inputLabel('Customer Name'),
+                          TextFormField(
+                            controller: _nameController,
+                            decoration: borderInputDecoration('Customer name'),
+                            keyboardType: TextInputType.text,
+                          ),
+
+                          // Phone
+                          inputLabel('Phone'),
+                          TextFormField(
+                            controller: _phoneController,
+                            decoration: borderInputDecoration('Phone'),
+                            keyboardType: TextInputType.text,
+                          ),
+                          // Receiveable Amount
+                          inputLabel('Receiveable Amount'),
+                          TextFormField(
+                            controller: _receiveableController,
+                            decoration: borderInputDecoration('Receiveable Amount'),
+                            keyboardType: TextInputType.text,
+                          ),
+                          // Description
+                          inputLabel('Description'),
+                          TextFormField(
+                            controller: _descriptionController,
+                            decoration: borderInputDecoration('Description'),
+                            keyboardType: TextInputType.text,
+                          ),
+                        ],
+                      ),
+                      // Supplier  Section
+                      ListView(
+                        children: [
+                          // Customer Name
+                          inputLabel('Supplier Name'),
+                          TextFormField(
+                            controller: _nameController,
+                            decoration: borderInputDecoration('Supplier name'),
+                            keyboardType: TextInputType.text,
+                          ),
+
+                          // Phone
+                          inputLabel('Phone'),
+                          TextFormField(
+                            controller: _phoneController,
+                            decoration: borderInputDecoration('Phone'),
+                            keyboardType: TextInputType.text,
+                          ),
+                          // Receiveable Amount
+                          inputLabel('Payable Amount'),
+                          TextFormField(
+                            controller: _PayableController,
+                            decoration: borderInputDecoration('Payable Amount'),
+                            keyboardType: TextInputType.text,
+                          ),
+                          // Description
+                          inputLabel('Description'),
+                          TextFormField(
+                            controller: _descriptionController,
+                            decoration: borderInputDecoration('Description'),
+                            keyboardType: TextInputType.text,
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                  backgroundColor: Colors.transparent,
+                ),
+              )),
+              actions: [
+                TextButton(onPressed: ()=> Navigator.pop(context),
+                    child: const Text('Close')),
+                TextButton(onPressed: ()=> Navigator.pop(context),
+                    child: const Text('Submit')),
+              ],
+              actionsPadding: const EdgeInsets.only(right: 10, bottom: 8),
+              insetPadding: const EdgeInsets.all(24),
+            ),
+          ),
+      ),
+
     );
   }
 }

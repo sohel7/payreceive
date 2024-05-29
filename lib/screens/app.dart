@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:payreceiveapp/screens/auth/my_account.dart';
 import 'package:payreceiveapp/screens/auth/my_walet.dart';
+import 'package:payreceiveapp/screens/components/app_drawer.dart';
 import 'package:payreceiveapp/screens/home_page.dart';
 
 class AppLaout extends StatefulWidget {
@@ -71,7 +72,7 @@ int selectedIndex=0;
           selectedIndex=value;
         }),
       ),
-
+    drawer:  AppDrawer(),
     );
   }
 }
